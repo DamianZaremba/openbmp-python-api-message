@@ -7,14 +7,14 @@
 """
 
 from abc import ABCMeta, abstractmethod
+from six import with_metaclass
 import time
 
 
-class BaseFieldProcessor(object):
+class BaseFieldProcessor(with_metaclass(ABCMeta)):
     """
     Parent class of field processors.
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         pass
@@ -72,11 +72,11 @@ class ParseLong(BaseFieldProcessor):
         value = None
 
         try:
-            value = long(fieldToProcess)
+            value = int(fieldToProcess)
 
         except ValueError:
             # Handle the exception
-            value = long(0)
+            value = int(0)
 
         return value
 
@@ -173,10 +173,10 @@ class ParseLongEmptyAsZero(BaseFieldProcessor):
         value = None
 
         try:
-            value = long(fieldToProcess)
+            value = int(fieldToProcess)
 
         except ValueError:
             # Handle the exception
-            value = long(0)
+            value = int(0)
 
         return value

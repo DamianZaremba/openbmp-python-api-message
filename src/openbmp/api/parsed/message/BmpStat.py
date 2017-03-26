@@ -6,10 +6,10 @@
     and is available at http:#www.eclipse.org/legal/epl-v10.html
 """
 
-from Base import *
-from FieldProcessors import *
-from Message import *
-from MsgBusFields import MsgBusFields
+from .Base import *
+from .FieldProcessors import *
+from .Message import *
+from .MsgBusFields import MsgBusFields
 
 
 class BmpStat(Base):

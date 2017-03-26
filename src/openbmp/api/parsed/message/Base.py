@@ -7,9 +7,10 @@
 """
 
 from abc import ABCMeta, abstractmethod
+from six import with_metaclass
 import json
 
-class Base(object):
+class Base(with_metaclass(ABCMeta)):
     """
     Base class for parsing openbmp.parsed.* messages.
 
@@ -20,8 +21,6 @@ class Base(object):
     The schema version is the max version supported.  Each extended class is responsible for handling
         backwards compatibility.
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         """Initializes the class variables."""
@@ -69,7 +68,7 @@ class Base(object):
         for r in records:
             fields = r.split('\t')  # Fields of a record as array.
 
-            fieldsMap = dict(zip(self.headerNames, fields))
+            fieldsMap = dict(list(zip(self.headerNames, fields)))
 
             # Process and validate each field with its corresponding processor.
             for (f, p, h) in zip(fields, self.getProcessors(), self.headerNames):

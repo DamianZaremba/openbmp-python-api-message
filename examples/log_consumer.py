@@ -32,43 +32,43 @@ def processMessage(msg):
 
     if t == "openbmp.parsed.router":
         router = Router(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print router.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(router.toJsonPretty())
 
     elif t == "openbmp.parsed.peer":
         peer = Peer(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print peer.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(peer.toJsonPretty())
 
     elif t == "openbmp.parsed.collector":
         collector = Collector(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print collector.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(collector.toJsonPretty())
 
     elif t == "openbmp.parsed.bmp_stat":
         bmp_stat = BmpStat(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print bmp_stat.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(bmp_stat.toJsonPretty())
 
     elif t == "openbmp.parsed.unicast_prefix":
         unicastPrefix = UnicastPrefix(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print unicastPrefix.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(unicastPrefix.toJsonPretty())
 
     elif t == "openbmp.parsed.ls_node":
         ls_node = LsNode(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print ls_node.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(ls_node.toJsonPretty())
 
     elif t == "openbmp.parsed.ls_link":
         ls_link = LsLink(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print ls_link.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(ls_link.toJsonPretty())
 
     elif t == "openbmp.parsed.ls_prefix":
         ls_prefix = LsPrefix(m)
-        print '\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')'
-        print ls_prefix.toJsonPretty()
+        print('\n' + 'Received Message (' + t_stamp + ') : ' + m_tag + '(V: ' + str(m.version) + ')')
+        print(ls_prefix.toJsonPretty())
 
 
 def main():
@@ -85,7 +85,7 @@ def main():
 
     try:
         # connect and bind to topics
-        print "Connecting to kafka... takes a minute to load offsets and topics, please wait"
+        print("Connecting to kafka... takes a minute to load offsets and topics, please wait")
         consumer = kafka.KafkaConsumer(
                             *topics,
                             bootstrap_servers=bootstrap_server,
@@ -95,15 +95,15 @@ def main():
                             auto_commit_interval_ms=1000,
                             auto_offset_reset="largest")
 
-        print "Now consuming/waiting for messages..."
+        print("Now consuming/waiting for messages...")
         for m in consumer:
             processMessage(m)
 
     except kafka.common.KafkaUnavailableError as err:
-        print "Kafka Error: %s" % str(err)
+        print("Kafka Error: %s" % str(err))
 
     except KeyboardInterrupt:
-        print "User stop requested"
+        print("User stop requested")
 
 if __name__ == '__main__':
     main()
